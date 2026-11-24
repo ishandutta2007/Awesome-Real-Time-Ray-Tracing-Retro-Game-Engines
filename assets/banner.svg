@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="360">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a14"/>
+      <stop offset="50%" stop-color="#0f1026"/>
+      <stop offset="100%" stop-color="#05050d"/>
+    </linearGradient>
+
+    <!-- Ray Tracing Beam Gradient -->
+    <linearGradient id="ray-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#7928ca" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff0080" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <linearGradient id="ray-grad-2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff007f" stop-opacity="0.7"/>
+      <stop offset="70%" stop-color="#00f2fe" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4facfe" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="neon-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f5a0"/>
+      <stop offset="50%" stop-color="#00d9f5"/>
+      <stop offset="100%" stop-color="#b400ff"/>
+    </linearGradient>
+
+    <!-- Radial Glow for Light Sources -->
+    <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffeedd" stop-opacity="0.9"/>
+      <stop offset="30%" stop-color="#ff007f" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0f1026" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Grid Pattern for Retro Floor -->
+    <pattern id="retro-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#25284a" stroke-width="1.2" opacity="0.6"/>
+    </pattern>
+
+    <style>
+      .retro-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        font-size: 38px;
+        letter-spacing: -0.5px;
+      }
+      .retro-sub {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        fill: #94a3b8;
+        letter-spacing: 0.8px;
+      }
+      .tag-text {
+        font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', monospace;
+        font-size: 11px;
+        font-weight: 600;
+        fill: #e2e8f0;
+      }
+      @keyframes rayPulse {
+        0% { opacity: 0.3; transform: scaleY(0.98); }
+        50% { opacity: 0.8; transform: scaleY(1.02); }
+        100% { opacity: 0.3; transform: scaleY(0.98); }
+      }
+      @keyframes floatParticle {
+        0% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
+        50% { transform: translateY(-15px) translateX(8px); opacity: 0.8; }
+        100% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
+      }
+      @keyframes scanline {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(360px); }
+      }
+      .animated-ray-1 {
+        animation: rayPulse 4s ease-in-out infinite;
+      }
+      .animated-ray-2 {
+        animation: rayPulse 5s ease-in-out infinite 1.5s;
+      }
+      .particle {
+        animation: floatParticle 6s ease-in-out infinite;
+      }
+      .particle-delay {
+        animation: floatParticle 7s ease-in-out infinite 2s;
+      }
+    </style>
+  </defs>
+
+  <!-- Deep Background -->
+  <rect width="100%" height="100%" fill="url(#bg-grad)"/>
+
+  <!-- Perspective Retro Grid Floor -->
+  <g opacity="0.45">
+    <polygon points="0,220 1200,220 1200,360 0,360" fill="url(#retro-grid)"/>
+    <line x1="0" y1="220" x2="1200" y2="220" stroke="#00f5a0" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Ambient Light Sphere (Path Traced Emitter) -->
+  <circle cx="1020" cy="110" r="140" fill="url(#sun-glow)" opacity="0.8"/>
+
+  <!-- Dynamic Ray Tracing Vectors (Background Layer) -->
+  <g class="animated-ray-1">
+    <path d="M 1020 110 L 780 230 L 620 180 L 400 260 L 150 210" fill="none" stroke="url(#ray-grad-1)" stroke-width="2.5" stroke-dasharray="8 4"/>
+    <circle cx="780" cy="230" r="4" fill="#00ffcc"/>
+    <circle cx="620" cy="180" r="4" fill="#ff0080"/>
+    <circle cx="400" cy="260" r="4" fill="#00d9f5"/>
+  </g>
+  <g class="animated-ray-2">
+    <path d="M 1020 110 L 880 260 L 520 250 L 310 190 L 50 240" fill="none" stroke="url(#ray-grad-2)" stroke-width="2" stroke-dasharray="6 6"/>
+    <circle cx="880" cy="260" r="3.5" fill="#ff007f"/>
+    <circle cx="520" cy="250" r="3.5" fill="#00f5a0"/>
+  </g>
+
+  <!-- Floating Ray Photon Particles -->
+  <circle cx="340" cy="80" r="2.5" fill="#00ffcc" class="particle"/>
+  <circle cx="680" cy="65" r="3" fill="#ff00a0" class="particle-delay"/>
+  <circle cx="890" cy="170" r="2" fill="#38bdf8" class="particle"/>
+  <circle cx="180" cy="140" r="2.5" fill="#f43f5e" class="particle-delay"/>
+
+  <!-- Foreground Cards / Badges (Non-obstructive) -->
+  <g transform="translate(60, 245)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="165" height="32" rx="16" fill="#131428" stroke="#334155" stroke-width="1.2"/>
+    <circle cx="16" cy="16" r="5" fill="#10b981"/>
+    <text x="30" y="20" class="tag-text">PATH TRACING</text>
+
+    <!-- Pill 2 -->
+    <rect x="180" y="0" width="150" height="32" rx="16" fill="#131428" stroke="#334155" stroke-width="1.2"/>
+    <circle cx="196" cy="16" r="5" fill="#06b6d4"/>
+    <text x="210" y="20" class="tag-text">RETRO ENGINES</text>
+
+    <!-- Pill 3 -->
+    <rect x="345" y="0" width="145" height="32" rx="16" fill="#131428" stroke="#334155" stroke-width="1.2"/>
+    <circle cx="361" cy="16" r="5" fill="#8b5cf6"/>
+    <text x="375" y="20" class="tag-text">RTX REMIX &amp; DXR</text>
+
+    <!-- Pill 4 -->
+    <rect x="505" y="0" width="145" height="32" rx="16" fill="#131428" stroke="#334155" stroke-width="1.2"/>
+    <circle cx="521" cy="16" r="5" fill="#ec4899"/>
+    <text x="535" y="20" class="tag-text">WEBGPU &amp; VULKAN</text>
+  </g>
+
+  <!-- Primary Foreground Titles -->
+  <g transform="translate(60, 95)">
+    <!-- Main Title with Neon Gradient -->
+    <text x="0" y="38" class="retro-title" fill="url(#neon-glow)">
+      Awesome Real-Time Ray Tracing &amp; Retro Game Engines
+    </text>
+    <!-- Subtitle -->
+    <text x="2" y="80" class="retro-sub">
+      Path-Traced Classic FPS Ports • Hardware DXR/Vulkan RT • WebGPU &amp; Cloud Pixel Streaming
+    </text>
+    <text x="2" y="108" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13px" fill="#64748b">
+      Curated index of high-performance rendering engines, modding runtimes, and real-time graphics ecosystems.
+    </text>
+  </g>
+
+  <!-- Retro Frame Border -->
+  <rect x="8" y="8" width="1184" height="344" rx="10" fill="none" stroke="#334155" stroke-width="1" opacity="0.4"/>
+</svg>
